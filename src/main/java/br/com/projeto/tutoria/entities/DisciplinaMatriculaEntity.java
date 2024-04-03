@@ -27,4 +27,5 @@ public class DisciplinaMatriculaEntity {
 
     @Column(nullable = false, precision = 5, scale = 2)
     private BigDecimal mediaFinal = BigDecimal.ZERO.setScale(2);
+
 }
