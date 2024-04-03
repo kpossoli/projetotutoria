@@ -15,6 +15,7 @@ public class NotaEntity {
 
     @ManyToOne
     @JoinColumn(name = "disciplina_matricula_id", nullable = false)
+    //Utilizar cammelCase quando for utilizar FK no body da requisição
     private DisciplinaMatriculaEntity disciplinaMatricula;
 
     @ManyToOne
@@ -22,7 +23,8 @@ public class NotaEntity {
     private ProfessorEntity professor;
 
     @Column(nullable = false, precision = 5, scale = 2)
-    private BigDecimal nota = BigDecimal.ZERO;
+    //private BigDecimal nota = BigDecimal.ZERO;
+    private BigDecimal nota;
 
     @Column(nullable = false, precision = 19, scale = 6)
     private BigDecimal coeficiente = BigDecimal.ZERO;

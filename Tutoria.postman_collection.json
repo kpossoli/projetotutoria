@@ -1,0 +1,571 @@
+{
+	"info": {
+		"_postman_id": "e08bbd48-4c2b-4931-a38d-d6f9ef87b3a9",
+		"name": "Tutoria",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33291302"
+	},
+	"item": [
+		{
+			"name": "Alunos",
+			"item": [
+				{
+					"name": "alunos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/alunos",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"alunos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alunos/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/alunos/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"alunos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alunos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste3\",\r\n    \"nascimento\": \"2024-11-30\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/alunos",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"alunos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alunos/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste2\",\r\n    \"nascimento\": \"2024-11-30\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/alunos/2",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"alunos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alunos/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/alunos/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"alunos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Professores",
+			"item": [
+				{
+					"name": "professores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/alunos",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"alunos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "professores/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/alunos/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"alunos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "professores",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"TesteProfessor1\"    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/professores",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"professores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "professores/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"TesteProfessorModificado\"    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/professores/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"professores",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "professores/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/professores/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"professores",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Disciplinas",
+			"item": [
+				{
+					"name": "disciplinas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/disciplinas",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplinas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disciplinas/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/disciplinas/4",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplinas",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disciplinas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"TesteDisciplina5\",\r\n    \"professor\":{\r\n        \"id\": 2\r\n        }      \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/disciplinas",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplinas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disciplinas/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"TesteDisciplinaModificado\",\r\n    \"professor\":{\r\n        \"id\": 2\r\n        }      \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/disciplinas/2",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplinas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disciplinas/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/disciplinas/2",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplinas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DisciplinaMatricula",
+			"item": [
+				{
+					"name": "disciplina-matriculas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/disciplinas",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplinas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disciplina-matriculas/:id Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/disciplina-matriculas/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplina-matriculas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disciplina-matriculas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"media_final\": 9,\r\n    \"disciplina\": {\r\n        \"id\": 4\r\n    },\r\n    \"aluno\": {\r\n        \"id\": 4\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/disciplina-matriculas",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplina-matriculas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disciplina-matriculas/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"TesteDisciplinaModificado\",\r\n    \"professor\":{\r\n        \"id\": 2\r\n        }      \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/disciplinas/2",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplinas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disciplinas/:id Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/disciplinas/2",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplinas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notas",
+			"item": [
+				{
+					"name": "notas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/disciplinas",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplinas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "notas/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/disciplina-matriculas/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplina-matriculas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "notas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"media_final\": 9,\r\n    \"disciplina\": {\r\n        \"id\": 4\r\n    },\r\n    \"aluno\": {\r\n        \"id\": 4\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/disciplina-matriculas",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplina-matriculas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "notas/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"TesteDisciplinaModificado\",\r\n    \"professor\":{\r\n        \"id\": 2\r\n        }      \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/disciplinas/2",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplinas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "notas/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/disciplinas/2",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplinas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseUrl",
+			"value": "localhost:8080"
+		}
+	]
+}
