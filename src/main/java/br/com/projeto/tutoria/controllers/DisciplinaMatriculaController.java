@@ -67,13 +67,13 @@ public class DisciplinaMatriculaController {
 //    }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarDisciplinaMatricula(@PathVariable Long id) {
-        try {
+    public ResponseEntity<Void> deletarDisciplinaMatricula(@PathVariable Long id) throws Exception {
+        //try {
             service.excluir(id);
             return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+       // } catch (Exception e) {
+         //   return ResponseEntity.badRequest().build();
+        //}
     }
 
 }
