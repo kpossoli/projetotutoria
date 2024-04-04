@@ -11,9 +11,12 @@ import java.util.List;
 public class NotaServiceImpl implements NotaService {
 
     private final NotaRepository repository;
+   // private final DisciplinaMatriculaServiceImpl disciplinaMatriculaServiceImpl;
+    private final DisciplinaMatriculaService disciplinaMatriculaService;
 
-    public NotaServiceImpl(NotaRepository repository) {
+    public NotaServiceImpl(NotaRepository repository, DisciplinaMatriculaService disciplinaMatriculaService) {
         this.repository = repository;
+        this.disciplinaMatriculaService = disciplinaMatriculaService;
     }
 
     @Override
@@ -43,5 +46,11 @@ public class NotaServiceImpl implements NotaService {
     public void excluir(Long id) {
         NotaEntity entity = buscarPorId(id);
         repository.delete(entity);
+    }
+
+    @Override
+    public List<NotaEntity> buscarPorMatriculaId(Long matriculaId) {
+        disciplinaMatriculaService.buscarPorId(matriculaId);
+        return repository.findByDisciplinaMatriculaId(matriculaId);
     }
 }

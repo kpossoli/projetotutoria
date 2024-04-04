@@ -16,4 +16,5 @@ public interface NotaService {
 
     void excluir(Long id);
 
+    List<NotaEntity> buscarPorMatriculaId(Long matriculaId);
 }
