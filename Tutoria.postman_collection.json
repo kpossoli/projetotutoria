@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "e08bbd48-4c2b-4931-a38d-d6f9ef87b3a9",
+		"_postman_id": "1574c295-f7f2-4dd7-bf07-9aa206a20046",
 		"name": "Tutoria",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "33291302"
+		"_exporter_id": "33277065"
 	},
 	"item": [
 		{
@@ -51,7 +51,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Teste3\",\r\n    \"nascimento\": \"2024-11-30\"\r\n}",
+							"raw": "{\r\n    \"nome\": \"Aluno 11\",\r\n    \"nascimento\": \"2008-01-01\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -77,7 +77,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Teste2\",\r\n    \"nascimento\": \"2024-11-30\"\r\n}",
+							"raw": "{\r\n    \"nome\": \"Aluno 11\",\r\n    \"nascimento\": \"1999-01-01\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -85,13 +85,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseUrl}}/alunos/2",
+							"raw": "{{BaseUrl}}/alunos/11",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"alunos",
-								"2"
+								"11"
 							]
 						}
 					},
@@ -103,13 +103,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/alunos/1",
+							"raw": "{{BaseUrl}}/alunos/12",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"alunos",
-								"1"
+								"12"
 							]
 						}
 					},
@@ -126,12 +126,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/alunos",
+							"raw": "{{BaseUrl}}/professores",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
-								"alunos"
+								"professores"
 							]
 						}
 					},
@@ -143,12 +143,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/alunos/1",
+							"raw": "{{BaseUrl}}/professores/1",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
-								"alunos",
+								"professores",
 								"1"
 							]
 						}
@@ -162,7 +162,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"TesteProfessor1\"    \r\n}",
+							"raw": "{\r\n    \"nome\": \"Professor D\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -188,7 +188,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"TesteProfessorModificado\"    \r\n}",
+							"raw": "{\r\n    \"nome\": \"Professor C&A\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -196,13 +196,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseUrl}}/professores/1",
+							"raw": "{{BaseUrl}}/professores/4",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"professores",
-								"1"
+								"4"
 							]
 						}
 					},
@@ -214,13 +214,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/professores/1",
+							"raw": "{{BaseUrl}}/professores/4",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"professores",
-								"1"
+								"4"
 							]
 						}
 					},
@@ -254,13 +254,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/disciplinas/4",
+							"raw": "{{BaseUrl}}/disciplinas/1",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"disciplinas",
-								"4"
+								"1"
 							]
 						}
 					},
@@ -273,7 +273,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"TesteDisciplina5\",\r\n    \"professor\":{\r\n        \"id\": 2\r\n        }      \r\n}",
+							"raw": "{\r\n    \"nome\": \"Java\",\r\n    \"professor\": {\r\n        \"id\": 2\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -299,7 +299,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"TesteDisciplinaModificado\",\r\n    \"professor\":{\r\n        \"id\": 2\r\n        }      \r\n}",
+							"raw": "{\r\n    \"nome\": \"Javascript\",\r\n    \"professor\": {\r\n        \"id\": 2\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -307,13 +307,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseUrl}}/disciplinas/2",
+							"raw": "{{BaseUrl}}/disciplinas/5",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"disciplinas",
-								"2"
+								"5"
 							]
 						}
 					},
@@ -325,13 +325,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/disciplinas/2",
+							"raw": "{{BaseUrl}}/disciplinas/4",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"disciplinas",
-								"2"
+								"4"
 							]
 						}
 					},
@@ -348,30 +348,68 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/disciplinas",
+							"raw": "{{BaseUrl}}/disciplina-matriculas",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
-								"disciplinas"
+								"disciplina-matriculas"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "disciplina-matriculas/:id Copy",
+					"name": "disciplina-matriculas/por-aluno/:id",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/disciplina-matriculas/1",
+							"raw": "{{BaseUrl}}/disciplina-matriculas/por-aluno/3",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"disciplina-matriculas",
-								"1"
+								"por-aluno",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disciplina-matriculas/por-disciplina/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/disciplina-matriculas/por-disciplina/2",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplina-matriculas",
+								"por-disciplina",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disciplina-matriculas/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/disciplina-matriculas/",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplina-matriculas",
+								""
 							]
 						}
 					},
@@ -384,7 +422,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"media_final\": 9,\r\n    \"disciplina\": {\r\n        \"id\": 4\r\n    },\r\n    \"aluno\": {\r\n        \"id\": 4\r\n    }\r\n}",
+							"raw": "{\r\n    \"aluno\": {\r\n        \"id\": 1\r\n    },\r\n    \"disciplina\": {\r\n        \"id\": 3\r\n    },\r\n    \"dataMatricula\": \"2024-04-03\",\r\n    \"mediaFinal\": 9.25\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -398,6 +436,33 @@
 							],
 							"path": [
 								"disciplina-matriculas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disciplina-matriculas/matricular",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"alunoId\": 1,\r\n    \"disciplinaId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/disciplina-matriculas/matricular",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"disciplina-matriculas",
+								"matricular"
 							]
 						}
 					},
@@ -431,18 +496,18 @@
 					"response": []
 				},
 				{
-					"name": "disciplinas/:id Copy",
+					"name": "disciplina-matriculas/:id",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/disciplinas/2",
+							"raw": "{{BaseUrl}}/disciplina-matriculas/1",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
-								"disciplinas",
-								"2"
+								"disciplina-matriculas",
+								"1"
 							]
 						}
 					},
@@ -459,12 +524,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/disciplinas",
+							"raw": "{{BaseUrl}}/notas",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
-								"disciplinas"
+								"notas"
 							]
 						}
 					},
@@ -476,12 +541,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/disciplina-matriculas/1",
+							"raw": "{{BaseUrl}}/notas/1",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
-								"disciplina-matriculas",
+								"notas",
 								"1"
 							]
 						}
@@ -495,7 +560,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"media_final\": 9,\r\n    \"disciplina\": {\r\n        \"id\": 4\r\n    },\r\n    \"aluno\": {\r\n        \"id\": 4\r\n    }\r\n}",
+							"raw": "\r\n{\r\n    \"disciplinaMatricula\": {\r\n        \"id\": 1\r\n    },\r\n    \"professor\": {\r\n        \"id\": 1\r\n    },\r\n    \"nota\": 2.5,\r\n    \"coeficiente\": 1.0\r\n}\r\n ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -503,12 +568,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseUrl}}/disciplina-matriculas",
+							"raw": "{{BaseUrl}}/notas",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
-								"disciplina-matriculas"
+								"notas"
 							]
 						}
 					},
@@ -529,12 +594,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseUrl}}/disciplinas/2",
+							"raw": "{{BaseUrl}}/notas/2",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
-								"disciplinas",
+								"notas",
 								"2"
 							]
 						}
@@ -547,12 +612,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/disciplinas/2",
+							"raw": "{{BaseUrl}}/notas/2",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
-								"disciplinas",
+								"notas",
 								"2"
 							]
 						}
