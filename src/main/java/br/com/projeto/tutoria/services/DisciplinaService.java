@@ -15,5 +15,4 @@ public interface DisciplinaService {
     DisciplinaEntity alterar(Long id, DisciplinaEntity entity);
 
     void excluir(Long id);
-
 }
