@@ -1,7 +1,7 @@
 package br.com.projeto.tutoria.controllers;
 
 
-import br.com.projeto.tutoria.dto.MatriculaRequestDTO;
+import br.com.projeto.tutoria.dto.NotaRequestDTO;
 import br.com.projeto.tutoria.entities.DisciplinaMatriculaEntity;
 import br.com.projeto.tutoria.entities.NotaEntity;
 import br.com.projeto.tutoria.services.NotaService;
@@ -40,11 +40,11 @@ public class NotaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(nota));
     }
 
-//    @PostMapping("/lancar-nota")
-//    public ResponseEntity<NotaEntity> lancarNota(@RequestBody NotaRequestDTO matriculaRequestDTO) {
-//        DisciplinaMatriculaEntity matriculado = service.matricularAluno(matriculaRequestDTO.getAlunoId(), matriculaRequestDTO.getDisciplinaId());
-//        return new ResponseEntity<>(matriculado, HttpStatus.CREATED);
-//    }
+    @PostMapping("/lancar-nota")
+    public ResponseEntity<NotaEntity> lancarNota(@RequestBody NotaRequestDTO notaRequestDTO) {
+        NotaEntity nota = service.lancarNota(notaRequestDTO.getDisciplinaMatriculaId(), notaRequestDTO.getNota(), notaRequestDTO.getCoeficiente());
+        return new ResponseEntity<>(nota, HttpStatus.CREATED);
+    }
 
     @PutMapping("{id}")
     public ResponseEntity<NotaEntity> alterarNota(@PathVariable Long id, @RequestBody NotaEntity nota) {
