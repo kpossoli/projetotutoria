@@ -2,6 +2,7 @@ package br.com.projeto.tutoria.services;
 
 import br.com.projeto.tutoria.entities.DisciplinaMatriculaEntity;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface DisciplinaMatriculaService {
@@ -23,4 +24,5 @@ public interface DisciplinaMatriculaService {
     void excluir(Long id) throws Exception;
 
 
+    BigDecimal calcularMediaAluno(Long alunoId);
 }

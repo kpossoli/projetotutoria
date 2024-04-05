@@ -3,7 +3,6 @@ package br.com.projeto.tutoria.services;
 import br.com.projeto.tutoria.entities.AlunoEntity;
 import br.com.projeto.tutoria.entities.DisciplinaEntity;
 import br.com.projeto.tutoria.entities.DisciplinaMatriculaEntity;
-import br.com.projeto.tutoria.entities.NotaEntity;
 import br.com.projeto.tutoria.exceptions.NotFoundException;
 import br.com.projeto.tutoria.repositories.AlunoRepository;
 import br.com.projeto.tutoria.repositories.DisciplinaMatriculaRepository;
@@ -105,13 +104,21 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
                 .orElseThrow(() -> new NotFoundException("Aluno não encontrado com id: " + alunoId));
         List<DisciplinaMatriculaEntity> alunoMatriculas = disciplinaMatriculaRepository.findByAlunoId(alunoId);
 
-        if (alunoMatriculas.isEmpty()) {
-            return BigDecimal.ZERO;
-        }
+        //Não precisa porque somaMediaDisciplinas já começa em 0
+//        if (alunoMatriculas.isEmpty()) {
+//            return BigDecimal.ZERO;
+//        }
+
+        BigDecimal somaMediaDisciplinas = BigDecimal.valueOf(0);
+        BigDecimal contador =BigDecimal.ZERO;
 
         for (DisciplinaMatriculaEntity matricula : alunoMatriculas) {
             BigDecimal mediaDisciplinas = matricula.getMediaFinal();
+            somaMediaDisciplinas.add(mediaDisciplinas) ;
+            contador.add(BigDecimal.ONE);
         }
+
+        return somaMediaDisciplinas.divide(contador);
 
 
     }
