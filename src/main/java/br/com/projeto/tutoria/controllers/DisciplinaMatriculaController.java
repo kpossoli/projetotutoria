@@ -28,12 +28,14 @@ public class DisciplinaMatriculaController {
         return ResponseEntity.status(HttpStatus.OK).body(service.buscarPorId(id));
     }
 
+    //TODO Tratamento de erro caso a id do aluno não exista
     @GetMapping("/por-aluno/{alunoId}")
     public ResponseEntity<List<DisciplinaMatriculaEntity>> buscarPorAluno(@PathVariable Long alunoId) {
         List<DisciplinaMatriculaEntity> matriculas = service.buscarPorAlunoId(alunoId);
         return ResponseEntity.ok(matriculas);
     }
 
+    //TODO Tratamento de erro caso a id da disciplina não exista
     @GetMapping("/por-disciplina/{disciplinaId}")
     public ResponseEntity<List<DisciplinaMatriculaEntity>> buscarPorDisciplina(@PathVariable Long disciplinaId) {
         List<DisciplinaMatriculaEntity> matriculas = service.buscarPorDisciplinaId(disciplinaId);
@@ -69,10 +71,10 @@ public class DisciplinaMatriculaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarDisciplinaMatricula(@PathVariable Long id) throws Exception {
         //try {
-            service.excluir(id);
-            return ResponseEntity.noContent().build();
-       // } catch (Exception e) {
-         //   return ResponseEntity.badRequest().build();
+        service.excluir(id);
+        return ResponseEntity.noContent().build();
+        // } catch (Exception e) {
+        //   return ResponseEntity.badRequest().build();
         //}
     }
 
