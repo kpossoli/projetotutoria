@@ -14,6 +14,13 @@ public interface DisciplinaMatriculaService {
 
     DisciplinaMatriculaEntity alterar(Long id, DisciplinaMatriculaEntity entity);
 
-    void excluir(Long id);
+    DisciplinaMatriculaEntity matricularAluno(Long alunoId, Long disciplinaId);
+
+    List<DisciplinaMatriculaEntity> buscarPorAlunoId(Long alunoId);
+
+    List<DisciplinaMatriculaEntity> buscarPorDisciplinaId(Long disciplinaId);
+
+    void excluir(Long id) throws Exception;
+
 
 }
