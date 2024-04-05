@@ -1,8 +1,8 @@
 package br.com.projeto.tutoria.services;
 
+import br.com.projeto.tutoria.dto.NotaLancamentoDTO;
 import br.com.projeto.tutoria.entities.NotaEntity;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface NotaService {
@@ -17,7 +17,7 @@ public interface NotaService {
 
     void excluir(Long id);
 
-    List<NotaEntity> buscarPorMatriculaId(Long matriculaId);
+    NotaEntity lancarNota(NotaLancamentoDTO notaLancamentoDTO);
 
-    NotaEntity lancarNota(Long disciplinaMatriculaId, BigDecimal nota, BigDecimal coeficiente);
+    List<NotaEntity> buscarNotasPorMatriculaId(Long matriculaId);
 }

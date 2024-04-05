@@ -9,4 +9,5 @@ import java.util.List;
 public interface NotaRepository extends JpaRepository<NotaEntity, Long> {
     boolean existsByDisciplinaMatriculaId(Long disciplinaMatriculaId);
     List<NotaEntity> findByDisciplinaMatriculaId(Long disciplinaMatriculaId);
+
 }

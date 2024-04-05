@@ -365,14 +365,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/disciplina-matriculas/por-aluno/3",
+							"raw": "{{BaseUrl}}/disciplina-matriculas/por-aluno/1",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"disciplina-matriculas",
 								"por-aluno",
-								"3"
+								"1"
 							]
 						}
 					},
@@ -384,32 +384,32 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/disciplina-matriculas/por-disciplina/2",
+							"raw": "{{BaseUrl}}/disciplina-matriculas/por-disciplina/1",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"disciplina-matriculas",
 								"por-disciplina",
-								"2"
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "disciplina-matriculas/1",
+					"name": "disciplina-matriculas/:id",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/disciplina-matriculas/",
+							"raw": "{{BaseUrl}}/disciplina-matriculas/1",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"disciplina-matriculas",
-								""
+								"1"
 							]
 						}
 					},
@@ -475,7 +475,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"TesteDisciplinaModificado\",\r\n    \"professor\":{\r\n        \"id\": 2\r\n        }      \r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"aluno\": {\r\n        \"id\": 1\r\n    },\r\n    \"disciplina\": {\r\n        \"id\": 1\r\n    },\r\n    \"dataMatricula\": \"1999-04-04\",\r\n    \"mediaFinal\": 0.00\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -483,13 +483,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseUrl}}/disciplinas/2",
+							"raw": "{{BaseUrl}}/disciplina-matriculas/1",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
-								"disciplinas",
-								"2"
+								"disciplina-matriculas",
+								"1"
 							]
 						}
 					},
@@ -541,12 +541,31 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/notas/1",
+							"raw": "{{BaseUrl}}/notas/8",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"notas",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "notas/por-matricula/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/notas/por-matricula/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"notas",
+								"por-matricula",
 								"1"
 							]
 						}
@@ -580,13 +599,13 @@
 					"response": []
 				},
 				{
-					"name": "notas/:id",
+					"name": "notas/lancar",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"TesteDisciplinaModificado\",\r\n    \"professor\":{\r\n        \"id\": 2\r\n        }      \r\n}",
+							"raw": "{\r\n    \"disciplinaMatriculaId\": 1,\r\n    \"nota\": 1.0,\r\n    \"coeficiente\": 0.2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -594,13 +613,40 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseUrl}}/notas/2",
+							"raw": "{{BaseUrl}}/notas/lancar",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"notas",
-								"2"
+								"lancar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "notas/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"disciplinaMatricula\": {\r\n        \"id\": 1\r\n    },\r\n    \"professor\": {\r\n        \"id\": 1\r\n    },\r\n    \"nota\": 0.0,\r\n    \"coeficiente\": 0.0\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/notas/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"notas",
+								"1"
 							]
 						}
 					},
@@ -612,13 +658,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BaseUrl}}/notas/2",
+							"raw": "{{BaseUrl}}/notas/8",
 							"host": [
 								"{{BaseUrl}}"
 							],
 							"path": [
 								"notas",
-								"2"
+								"8"
 							]
 						}
 					},

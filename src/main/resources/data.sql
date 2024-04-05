@@ -20,13 +20,13 @@ INSERT INTO disciplinas (nome, professor_id) VALUES
 
 -- Correção: Inclua apenas a inserção correta com data_matricula
 INSERT INTO disciplina_matriculas (aluno_id, disciplina_id, media_final, data_matricula) VALUES 
-(1, 1, 9.5, CURRENT_DATE),
-(2, 2, 8.0, CURRENT_DATE),
-(3, 3, 7.5, CURRENT_DATE);
+(1, 1, 0.0, CURRENT_DATE),
+(2, 2, 0.0, CURRENT_DATE),
+(3, 3, 0.0, CURRENT_DATE);
 
 INSERT INTO notas (disciplina_matricula_id, professor_id, nota, coeficiente) VALUES
-(1, 1, 9.5, 1.000000),
-(1, 1, 8.0, 1.000000),
-(2, 2, 7.5, 1.000000),
-(3, 3, 8.5, 1.000000),
-(3, 1, 9.0, 1.000000);
+(1, 1, 0.0, 0.000000),
+(1, 1, 0.0, 0.000000),
+(2, 2, 0.0, 0.000000),
+(3, 3, 0.0, 0.000000),
+(3, 1, 0.0, 0.000000);
