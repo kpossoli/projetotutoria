@@ -1,6 +1,7 @@
 package br.com.projeto.tutoria.controllers;
 
 
+import br.com.projeto.tutoria.dto.NotaLancamentoDTO;
 import br.com.projeto.tutoria.entities.NotaEntity;
 import br.com.projeto.tutoria.services.NotaService;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,12 @@ public class NotaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(nota));
     }
 
+    @PostMapping("/lancar")
+    public ResponseEntity<NotaEntity> lancarNota(@RequestBody NotaLancamentoDTO notaLancamentoDTO) {
+        NotaEntity novaNota = service.lancarNota(notaLancamentoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novaNota);
+    }
+
     @PutMapping("{id}")
     public ResponseEntity<NotaEntity> alterarNota(@PathVariable Long id, @RequestBody NotaEntity nota) {
         return ResponseEntity.status(HttpStatus.OK).body(service.alterar(id, nota));
@@ -41,6 +48,12 @@ public class NotaController {
     public ResponseEntity<Void> deletarNota(@PathVariable Long id) {
         service.excluir(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/por-matricula/{matriculaId}")
+    public ResponseEntity<List<NotaEntity>> buscarNotasPorMatriculaId(@PathVariable Long matriculaId) {
+        List<NotaEntity> notas = service.buscarNotasPorMatriculaId(matriculaId);
+        return notas.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(notas);
     }
 
 
