@@ -1,6 +1,7 @@
 package br.com.projeto.tutoria.controllers;
 
 
+import br.com.projeto.tutoria.dto.AlunoMediaDTO;
 import br.com.projeto.tutoria.dto.MatriculaRequestDTO;
 import br.com.projeto.tutoria.entities.DisciplinaMatriculaEntity;
 import br.com.projeto.tutoria.services.DisciplinaMatriculaService;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -17,6 +19,7 @@ import java.util.List;
 public class DisciplinaMatriculaController {
 
     private final DisciplinaMatriculaService service;
+
 
     @GetMapping
     public ResponseEntity<List<DisciplinaMatriculaEntity>> buscarTodos() {
@@ -33,6 +36,13 @@ public class DisciplinaMatriculaController {
     public ResponseEntity<List<DisciplinaMatriculaEntity>> buscarPorAluno(@PathVariable Long alunoId) {
         List<DisciplinaMatriculaEntity> matriculas = service.buscarPorAlunoId(alunoId);
         return ResponseEntity.ok(matriculas);
+    }
+
+    @GetMapping("/media-disciplinas/{alunoId}")
+    public ResponseEntity<AlunoMediaDTO> calcularMediaAluno(@PathVariable Long alunoId) {
+        BigDecimal alunoMedia = service.calcularMediaAluno(alunoId);
+        AlunoMediaDTO alunoMediaDTO = new AlunoMediaDTO(alunoMedia);
+        return ResponseEntity.ok(alunoMediaDTO);
     }
 
     //TODO Tratamento de erro caso a id da disciplina não exista
@@ -77,5 +87,7 @@ public class DisciplinaMatriculaController {
         //   return ResponseEntity.badRequest().build();
         //}
     }
+
+
 
 }

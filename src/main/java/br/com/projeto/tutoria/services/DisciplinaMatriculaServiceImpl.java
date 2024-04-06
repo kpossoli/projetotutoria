@@ -11,6 +11,7 @@ import br.com.projeto.tutoria.repositories.NotaRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Service
@@ -104,21 +105,19 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
                 .orElseThrow(() -> new NotFoundException("Aluno não encontrado com id: " + alunoId));
         List<DisciplinaMatriculaEntity> alunoMatriculas = disciplinaMatriculaRepository.findByAlunoId(alunoId);
 
-        //Não precisa porque somaMediaDisciplinas já começa em 0
-//        if (alunoMatriculas.isEmpty()) {
-//            return BigDecimal.ZERO;
-//        }
-
-        BigDecimal somaMediaDisciplinas = BigDecimal.valueOf(0);
+        BigDecimal somaMediaDisciplinas = BigDecimal.ZERO;
         BigDecimal contador =BigDecimal.ZERO;
 
         for (DisciplinaMatriculaEntity matricula : alunoMatriculas) {
             BigDecimal mediaDisciplinas = matricula.getMediaFinal();
-            somaMediaDisciplinas.add(mediaDisciplinas) ;
-            contador.add(BigDecimal.ONE);
+            somaMediaDisciplinas = somaMediaDisciplinas.add(mediaDisciplinas) ;
+            contador = contador.add(BigDecimal.ONE);
+        }
+        if(contador.compareTo(BigDecimal.ZERO) == 0){
+            return BigDecimal.ZERO;
         }
 
-        return somaMediaDisciplinas.divide(contador);
+        return somaMediaDisciplinas.divide(contador, 2, RoundingMode.HALF_UP);
 
 
     }

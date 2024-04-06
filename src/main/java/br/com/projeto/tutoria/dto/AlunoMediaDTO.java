@@ -12,4 +12,8 @@ public class AlunoMediaDTO {
 
     private BigDecimal mediaGeralAluno;
 
+    public AlunoMediaDTO(BigDecimal mediaGeralAluno) {
+        this.mediaGeralAluno = mediaGeralAluno;
+    }
+
 }
