@@ -52,6 +52,7 @@ public class DisciplinaMatriculaController {
         return ResponseEntity.ok(matriculas);
     }
 
+    //TODO retirar o método
     @PostMapping
     public ResponseEntity<DisciplinaMatriculaEntity> criarDisciplinaMatricula(@RequestBody DisciplinaMatriculaEntity disciplinaMatricula) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(disciplinaMatricula));
@@ -87,7 +88,6 @@ public class DisciplinaMatriculaController {
         //   return ResponseEntity.badRequest().build();
         //}
     }
-
 
 
 }

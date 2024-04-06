@@ -119,7 +119,6 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
 
         return somaMediaDisciplinas.divide(contador, 2, RoundingMode.HALF_UP);
 
-
     }
 
 
