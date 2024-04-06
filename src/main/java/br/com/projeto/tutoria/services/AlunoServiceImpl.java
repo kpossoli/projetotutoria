@@ -10,20 +10,20 @@ import java.util.List;
 @Service
 public class AlunoServiceImpl implements AlunoService {
 
-    private final AlunoRepository repository;
+    private final AlunoRepository alunoRepository;
 
-    public AlunoServiceImpl(AlunoRepository repository) {
-        this.repository = repository;
+    public AlunoServiceImpl(AlunoRepository alunoRepository) {
+        this.alunoRepository = alunoRepository;
     }
 
     @Override
     public List<AlunoEntity> buscarTodos() {
-        return repository.findAll();
+        return alunoRepository.findAll();
     }
 
     @Override
     public AlunoEntity buscarPorId(Long id) {
-        return repository.findById(id)
+        return alunoRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(
                         "Aluno não encontrado com id: " + id
                 ));
@@ -32,19 +32,19 @@ public class AlunoServiceImpl implements AlunoService {
     @Override
     public AlunoEntity criar(AlunoEntity entity) {
         entity.setId(null); // Garante que um novo ID será gerado.
-        return repository.save(entity);
+        return alunoRepository.save(entity);
     }
 
     @Override
     public AlunoEntity alterar(Long id, AlunoEntity entity) {
         buscarPorId(id); // Verifica a existência do Aluno.
         entity.setId(id); // Assegura que a alteração será no Aluno correto.
-        return repository.save(entity);
+        return alunoRepository.save(entity);
     }
 
     @Override
     public void excluir(Long id) {
         AlunoEntity entity = buscarPorId(id); // Verifica se o Aluno existe antes de excluir.
-        repository.delete(entity);
+        alunoRepository.delete(entity);
     }
 }

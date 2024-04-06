@@ -45,23 +45,23 @@ public class DisciplinaMatriculaController {
         return ResponseEntity.ok(alunoMediaDTO);
     }
 
-    //TODO Tratamento de erro caso a id da disciplina não exista
     @GetMapping("/por-disciplina/{disciplinaId}")
     public ResponseEntity<List<DisciplinaMatriculaEntity>> buscarPorDisciplina(@PathVariable Long disciplinaId) {
         List<DisciplinaMatriculaEntity> matriculas = service.buscarPorDisciplinaId(disciplinaId);
         return ResponseEntity.ok(matriculas);
     }
 
-    //TODO retirar o método
-    @PostMapping
-    public ResponseEntity<DisciplinaMatriculaEntity> criarDisciplinaMatricula(@RequestBody DisciplinaMatriculaEntity disciplinaMatricula) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(disciplinaMatricula));
-    }
+
+//    @PostMapping
+//    public ResponseEntity<DisciplinaMatriculaEntity> criarDisciplinaMatricula(@RequestBody DisciplinaMatriculaEntity disciplinaMatricula) {
+//        return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(disciplinaMatricula));
+//    }
 
     //O corpo da requisição é automaticamente mapeado para uma instância de MatriculaRequestDTO
     //@RequestBody informa ao Spring para analisar o corpo da requisição JSON e criar o DTO com esses dados.
     //Os IDs do aluno e da disciplina são extraídos do MatriculaRequestDTO e passados para o serviço
     //Após se
+
     @PostMapping("/matricular")
     public ResponseEntity<DisciplinaMatriculaEntity> matricularAluno(@RequestBody MatriculaRequestDTO matriculaRequestDTO) {
         DisciplinaMatriculaEntity matriculado = service.matricularAluno(matriculaRequestDTO.getAlunoId(), matriculaRequestDTO.getDisciplinaId());

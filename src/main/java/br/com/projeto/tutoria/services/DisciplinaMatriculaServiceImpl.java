@@ -23,8 +23,8 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
 
     private final NotaRepository notaRepository;
 
-    public DisciplinaMatriculaServiceImpl(DisciplinaMatriculaRepository repository, AlunoRepository alunoRepository, DisciplinaRepository disciplinaRepository, NotaRepository notaRepository) {
-        this.disciplinaMatriculaRepository = repository;
+    public DisciplinaMatriculaServiceImpl(DisciplinaMatriculaRepository disciplinaMatriculaRepository, AlunoRepository alunoRepository, DisciplinaRepository disciplinaRepository, NotaRepository notaRepository) {
+        this.disciplinaMatriculaRepository = disciplinaMatriculaRepository;
         this.alunoRepository = alunoRepository;
         this.disciplinaRepository = disciplinaRepository;
         this.notaRepository = notaRepository;
@@ -78,6 +78,8 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
 
     @Override
     public List<DisciplinaMatriculaEntity> buscarPorDisciplinaId(Long disciplinaId) {
+        DisciplinaEntity disciplina = disciplinaRepository.findById(disciplinaId)
+                .orElseThrow(() -> new NotFoundException("Disciplina não encontrada com id: " + disciplinaId));
         return disciplinaMatriculaRepository.findByDisciplinaId(disciplinaId);
     }
 
@@ -106,14 +108,14 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
         List<DisciplinaMatriculaEntity> alunoMatriculas = disciplinaMatriculaRepository.findByAlunoId(alunoId);
 
         BigDecimal somaMediaDisciplinas = BigDecimal.ZERO;
-        BigDecimal contador =BigDecimal.ZERO;
+        BigDecimal contador = BigDecimal.ZERO;
 
         for (DisciplinaMatriculaEntity matricula : alunoMatriculas) {
             BigDecimal mediaDisciplinas = matricula.getMediaFinal();
-            somaMediaDisciplinas = somaMediaDisciplinas.add(mediaDisciplinas) ;
+            somaMediaDisciplinas = somaMediaDisciplinas.add(mediaDisciplinas);
             contador = contador.add(BigDecimal.ONE);
         }
-        if(contador.compareTo(BigDecimal.ZERO) == 0){
+        if (contador.compareTo(BigDecimal.ZERO) == 0) {
             return BigDecimal.ZERO;
         }
 

@@ -22,14 +22,14 @@ VALUES ('Matemática', 1),
        ('Geografia', 1);
 
 -- Correção: Inclua apenas a inserção correta com data_matricula
-INSERT INTO disciplina_matriculas (aluno_id, disciplina_id, media_final, data_matricula) VALUES
-(1, 1, 0.0, CURRENT_DATE),
-(2, 2, 0.0, CURRENT_DATE),
-(3, 3, 0.0, CURRENT_DATE);
+-- INSERT INTO disciplina_matriculas (aluno_id, disciplina_id, media_final, data_matricula) VALUES
+-- (1, 1, 0.0, CURRENT_DATE),
+-- (2, 2, 0.0, CURRENT_DATE),
+-- (3, 3, 0.0, CURRENT_DATE);
 
 -- INSERT INTO notas (disciplina_matricula_id, professor_id, nota, coeficiente) VALUES
-(1, 1, 0.0, 0.000000),
-(1, 1, 0.0, 0.000000),
-(2, 2, 0.0, 0.000000),
-(3, 3, 0.0, 0.000000),
-(3, 1, 0.0, 0.000000);
+-- (1, 1, 0.0, 0.000000),
+-- (1, 1, 0.0, 0.000000),
+-- (2, 2, 0.0, 0.000000),
+-- (3, 3, 0.0, 0.000000),
+-- (3, 1, 0.0, 0.000000);

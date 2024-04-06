@@ -6,10 +6,7 @@ import br.com.projeto.tutoria.entities.NotaEntity;
 import br.com.projeto.tutoria.exceptions.NotFoundException;
 import br.com.projeto.tutoria.repositories.DisciplinaMatriculaRepository;
 import br.com.projeto.tutoria.repositories.NotaRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -18,42 +15,42 @@ import java.util.List;
 @Service
 public class NotaServiceImpl implements NotaService {
 
-    private final NotaRepository repository;
+    private final NotaRepository notaRepository;
     private DisciplinaMatriculaRepository disciplinaMatriculaRepository;
 
-    public NotaServiceImpl(NotaRepository repository, DisciplinaMatriculaRepository disciplinaMatriculaRepository) {
-        this.repository = repository;
+    public NotaServiceImpl(NotaRepository notaRepository, DisciplinaMatriculaRepository disciplinaMatriculaRepository) {
+        this.notaRepository = notaRepository;
         this.disciplinaMatriculaRepository = disciplinaMatriculaRepository;
     }
 
     @Override
     public List<NotaEntity> buscarTodos() {
-        return repository.findAll();
+        return notaRepository.findAll();
     }
 
     @Override
     public NotaEntity buscarPorId(Long id) {
-        return repository.findById(id)
+        return notaRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Nota não encontrada com id: " + id));
     }
 
     @Override
     public NotaEntity criar(NotaEntity entity) {
-        return repository.save(entity);
+        return notaRepository.save(entity);
     }
 
     @Override
     public NotaEntity alterar(Long id, NotaEntity entity) {
         buscarPorId(id);
         entity.setId(id);
-        return repository.save(entity);
+        return notaRepository.save(entity);
     }
 
     @Override
     public void excluir(Long id) {
         NotaEntity nota = buscarPorId(id); // Busca a nota para obter o ID da matrícula
         Long matriculaId = nota.getDisciplinaMatricula().getId(); // Obtem o ID da matrícula
-        repository.delete(nota); // Exclui a nota
+        notaRepository.delete(nota); // Exclui a nota
         atualizarMediaFinal(matriculaId); // Recalcula a média final da matrícula
     }
 
@@ -67,7 +64,7 @@ public class NotaServiceImpl implements NotaService {
         nota.setNota(notaLancamentoDTO.getNota());
         nota.setCoeficiente(notaLancamentoDTO.getCoeficiente());
         nota.setProfessor(matricula.getDisciplina().getProfessor());
-        NotaEntity notaSalva = repository.save(nota);
+        NotaEntity notaSalva = notaRepository.save(nota);
 
         atualizarMediaFinal(matricula.getId());
 
@@ -76,12 +73,12 @@ public class NotaServiceImpl implements NotaService {
 
     @Override
     public List<NotaEntity> buscarNotasPorMatriculaId(Long matriculaId) {
-        return repository.findByDisciplinaMatriculaId(matriculaId);
+        return notaRepository.findByDisciplinaMatriculaId(matriculaId);
     }
 
 
     private void atualizarMediaFinal(Long matriculaId) {
-        List<NotaEntity> notas = repository.findByDisciplinaMatriculaId(matriculaId);
+        List<NotaEntity> notas = notaRepository.findByDisciplinaMatriculaId(matriculaId);
         if (notas.isEmpty()) {
             setMediaFinal(matriculaId, BigDecimal.ZERO);
         } else {

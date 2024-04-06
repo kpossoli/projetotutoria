@@ -27,8 +27,6 @@ public class DisciplinasController {
         return ResponseEntity.status(HttpStatus.OK).body(service.buscarPorId(id));
     }
 
-
-    //TODO Tratar o erro caso a id do professor seja inválida
     @PostMapping
     public ResponseEntity<DisciplinaEntity> criarDisciplina(@RequestBody DisciplinaEntity disciplina) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(disciplina));
