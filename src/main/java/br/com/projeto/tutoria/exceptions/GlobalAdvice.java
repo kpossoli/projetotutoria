@@ -86,4 +86,14 @@ public class GlobalAdvice {
                 .build();
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(erro);
     }
+
+    @ExceptionHandler(MatriculaDuplicadaException.class)
+    public ResponseEntity<?> handleMatriculaDuplicada(MatriculaDuplicadaException e) {
+        Erro erro = Erro.builder()
+                .codigo("409") // HTTP 409 Conflict
+                .mensagem(e.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
+    }
+
 }

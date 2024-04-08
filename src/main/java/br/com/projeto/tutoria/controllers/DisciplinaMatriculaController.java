@@ -45,7 +45,6 @@ public class DisciplinaMatriculaController {
         return ResponseEntity.status(HttpStatus.OK).body(disciplinaMatricula);
     }
 
-    //TODO Tratamento de erro caso a id do aluno não exista
     @GetMapping("/por-aluno/{alunoId}")
     public ResponseEntity<List<DisciplinaMatriculaEntity>> buscarPorAluno(@PathVariable Long alunoId) {
         log.info("GET /disciplina-matriculas/por-aluno/{} -> Início", alunoId);
@@ -56,7 +55,6 @@ public class DisciplinaMatriculaController {
         return ResponseEntity.ok(matriculas);
     }
 
-    //TODO Tratamento de erro caso a id da matricula não exista
     @GetMapping("/por-disciplina/{disciplinaId}")
     public ResponseEntity<List<DisciplinaMatriculaEntity>> buscarPorDisciplina(@PathVariable Long disciplinaId) {
         log.info("GET /disciplina-matriculas/por-disciplina/{} -> Início", disciplinaId);
@@ -67,7 +65,6 @@ public class DisciplinaMatriculaController {
         return ResponseEntity.ok(matriculas);
     }
 
-    //TODO tratar o erro ao não colocar ID
     @GetMapping("/media-disciplinas/{alunoId}")
     public ResponseEntity<AlunoMediaDTO> calcularMediaAluno(@PathVariable Long alunoId) {
         log.info("GET /disciplina-matriculas/media-disciplinas/{} -> Início", alunoId);
@@ -89,18 +86,17 @@ public class DisciplinaMatriculaController {
         return new ResponseEntity<>(matriculado, HttpStatus.CREATED);
     }
 
-    //TODO falta tratamento de erro: erro 500, alterar
-    @PutMapping("{id}")
-    public ResponseEntity<DisciplinaMatriculaEntity> alterarDisciplinaMatricula(@PathVariable Long id, @RequestBody DisciplinaMatriculaEntity disciplinaMatricula) {
-        log.info("PUT /disciplina-matriculas/{} -> Início", id);
-        DisciplinaMatriculaEntity disciplina = service.alterar(id, disciplinaMatricula);
-        log.info("PUT /disciplina-matriculas/{} -> Atualizado com sucesso", id);
-        log.info("PUT /disciplina-matriculas/{} -> 200 OK", id);
-        log.debug("PUT /disciplina-matriculas/{} -> Response Body:\n{}\n", id, JsonUtil.objetoParaJson(disciplina));
-        return ResponseEntity.status(HttpStatus.OK).body(disciplina);
-    }
+//    //TODO falta tratamento de erro: erro 500, alterar EU TIRARIA!
+//    @PutMapping("{id}")
+//    public ResponseEntity<DisciplinaMatriculaEntity> alterarDisciplinaMatricula(@PathVariable Long id, @RequestBody DisciplinaMatriculaEntity disciplinaMatricula) {
+//        log.info("PUT /disciplina-matriculas/{} -> Início", id);
+//        DisciplinaMatriculaEntity disciplina = service.alterar(id, disciplinaMatricula);
+//        log.info("PUT /disciplina-matriculas/{} -> Atualizado com sucesso", id);
+//        log.info("PUT /disciplina-matriculas/{} -> 200 OK", id);
+//        log.debug("PUT /disciplina-matriculas/{} -> Response Body:\n{}\n", id, JsonUtil.objetoParaJson(disciplina));
+//        return ResponseEntity.status(HttpStatus.OK).body(disciplina);
+//    }
 
-    //TODO tratamento de erro, erro 500 quando matricula não existe
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarDisciplinaMatricula(@PathVariable Long id) throws Exception {
         log.info("DELETE /disciplina-matriculas/{}", id);

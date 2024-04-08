@@ -30,31 +30,35 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
         this.notaRepository = notaRepository;
     }
 
-    @Override
+    @Override // GET disciplina-matriculas OK
     public List<DisciplinaMatriculaEntity> buscarTodos() {
         return disciplinaMatriculaRepository.findAll();
     }
 
-    @Override
+    @Override // GET disciplina-matriculas/:id OK
     public DisciplinaMatriculaEntity buscarPorId(Long id) {
         return disciplinaMatriculaRepository.findById(id)
                 .orElseThrow(() -> new DisciplinaMatriculaByIdNotFoundException(id));
     }
 
-    @Override
+    @Override // PUT disciplina-matriculas/:id OK
     public DisciplinaMatriculaEntity alterar(Long id, DisciplinaMatriculaEntity entity) {
         buscarPorId(id);
         entity.setId(id);
         return disciplinaMatriculaRepository.save(entity);
     }
 
-
     @Override
     public DisciplinaMatriculaEntity matricularAluno(Long alunoId, Long disciplinaId) {
         AlunoEntity aluno = alunoRepository.findById(alunoId)
-                .orElseThrow(() -> new AlunoByIdNotFoundException(alunoId)); // refatorado
+                .orElseThrow(() -> new AlunoByIdNotFoundException(alunoId));
         DisciplinaEntity disciplina = disciplinaRepository.findById(disciplinaId)
-                .orElseThrow(() -> new DisciplinaByIdNotFoundException(disciplinaId)); // refatorado
+                .orElseThrow(() -> new DisciplinaByIdNotFoundException(disciplinaId));
+
+        // Verifica se já existe uma matrícula para este aluno nesta disciplina
+        if (disciplinaMatriculaRepository.existsByAlunoAndDisciplina(aluno, disciplina)) {
+            throw new MatriculaDuplicadaException(alunoId, disciplinaId);
+        }
 
         DisciplinaMatriculaEntity novaMatricula = new DisciplinaMatriculaEntity();
         novaMatricula.setAluno(aluno);
@@ -63,19 +67,24 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
         return disciplinaMatriculaRepository.save(novaMatricula);
     }
 
-    @Override
+    @Override // GET disciplina-matriculas/por-aluno/:id OK
     public List<DisciplinaMatriculaEntity> buscarPorAlunoId(Long alunoId) {
-        return disciplinaMatriculaRepository.findByAlunoId(alunoId);
+        if (!alunoRepository.existsById(alunoId)) {
+            throw new AlunoByIdNotFoundException(alunoId);
+        }
+        List<DisciplinaMatriculaEntity> matriculas = disciplinaMatriculaRepository.findByAlunoId(alunoId);
+        return matriculas;
     }
 
-    @Override
+
+    @Override // disciplina-matriculas/por-disciplina/:id OK // corregir id vazio
     public List<DisciplinaMatriculaEntity> buscarPorDisciplinaId(Long disciplinaId) {
         DisciplinaEntity disciplina = disciplinaRepository.findById(disciplinaId)
                 .orElseThrow(() -> new NotFoundException("Disciplina não encontrada com id: " + disciplinaId));
         return disciplinaMatriculaRepository.findByDisciplinaId(disciplinaId);
     }
 
-    @Override
+    @Override // disciplina-matriculas/:id OK // corregir id vazio
     public void excluir(Long id) {
 
         if (notaRepository.existsByDisciplinaMatriculaId(id)) {
@@ -86,27 +95,26 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
             disciplinaMatriculaRepository.delete(entity);
         }
     }
-
-    @Override
+    @Override // disciplina-matriculas/media-disciplinas/:id OK
     public BigDecimal calcularMediaAluno(Long alunoId) {
-        AlunoEntity aluno = alunoRepository.findById(alunoId)
-                .orElseThrow(() -> new AlunoByIdNotFoundException(alunoId));
-        List<DisciplinaMatriculaEntity> alunoMatriculas = disciplinaMatriculaRepository.findByAlunoId(alunoId);
-
+        List<DisciplinaMatriculaEntity> matriculas = disciplinaMatriculaRepository.findByAlunoId(alunoId);
         BigDecimal somaMediaDisciplinas = BigDecimal.ZERO;
-        BigDecimal contador = BigDecimal.ZERO;
+        int contadorDisciplinasAvaliadas = 0;
 
-        for (DisciplinaMatriculaEntity matricula : alunoMatriculas) {
-            BigDecimal mediaDisciplinas = matricula.getMediaFinal();
-            somaMediaDisciplinas = somaMediaDisciplinas.add(mediaDisciplinas);
-            contador = contador.add(BigDecimal.ONE);
+        for (DisciplinaMatriculaEntity matricula : matriculas) {
+            BigDecimal mediaDisciplina = matricula.getMediaFinal();
+            // Verifica se a disciplina foi avaliada (média final > 0)
+            if (mediaDisciplina.compareTo(BigDecimal.ZERO) > 0) {
+                somaMediaDisciplinas = somaMediaDisciplinas.add(mediaDisciplina);
+                contadorDisciplinasAvaliadas++;
+            }
         }
-        if (contador.compareTo(BigDecimal.ZERO) == 0) {
-            return BigDecimal.ZERO.setScale(2);
+        // Evita divisão por zero se o aluno não foi avaliado em nenhuma disciplina
+        if (contadorDisciplinasAvaliadas == 0) {
+            return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
         }
 
-        return somaMediaDisciplinas.divide(contador, 2, RoundingMode.HALF_UP);
-
+        return somaMediaDisciplinas.divide(BigDecimal.valueOf(contadorDisciplinasAvaliadas), 2, RoundingMode.HALF_UP);
     }
 
 }
