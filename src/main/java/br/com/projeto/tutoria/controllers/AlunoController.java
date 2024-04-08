@@ -60,13 +60,25 @@ public class AlunoController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<AlunoEntity> alterarAluno(@PathVariable Long id, @RequestBody AlunoEntity aluno) {
+    public ResponseEntity<AlunoEntity> alterarAluno(@PathVariable Long id, @RequestBody AlunoEntity alunoRequest) {
+        log.info("PUT /alunos/{} -> Início", id);
+
+        AlunoEntity aluno = service.alterar(id, alunoRequest);
+
+        log.info("PUT /alunos/{} -> Atualizado com sucesso", id);
+        log.info("PUT /alunos/{} -> 200 OK", id);
+        log.debug("PUT /alunos/{} -> Response Body:\n{}\n", id, JsonUtil.objetoParaJson(alunoRequest));
         return ResponseEntity.status(HttpStatus.OK).body(service.alterar(id, aluno));
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deletarAluno(@PathVariable Long id) {
+        log.info("DELETE /alunos/{}", id);
+
         service.excluir(id);
+
+        log.info("DELETE /alunos/{} -> Excluído", id);
+        log.info("DELETE /alunos/{} -> 204 NO CONTENT", id);
         return ResponseEntity.noContent().build();
     }
 
