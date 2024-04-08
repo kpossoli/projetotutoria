@@ -1,7 +1,9 @@
 package br.com.projeto.tutoria.services;
 
 import br.com.projeto.tutoria.entities.DisciplinaEntity;
+import br.com.projeto.tutoria.exceptions.DisciplinaByIdNotFoundException;
 import br.com.projeto.tutoria.exceptions.NotFoundException;
+import br.com.projeto.tutoria.exceptions.ProfessorByIdNotFoundException;
 import br.com.projeto.tutoria.repositories.DisciplinaRepository;
 import br.com.projeto.tutoria.repositories.ProfessorRepository;
 import org.springframework.stereotype.Service;
@@ -27,23 +29,44 @@ public class DisciplinaServiceImpl implements DisciplinaService {
     @Override
     public DisciplinaEntity buscarPorId(Long id) {
         return disciplinaRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Disciplina não encontrada com id: " + id));
+                .orElseThrow(() -> new DisciplinaByIdNotFoundException(id));
     }
+
+//    @Override
+//    public DisciplinaEntity criar(DisciplinaEntity entity) {
+//        if (!professorRepository.existsById(entity.getProfessor().getId())) {
+//            throw new IllegalArgumentException("O id do professor não foi encontrado.");
+//        }
+//        return disciplinaRepository.save(entity);
+//    }
 
     @Override
     public DisciplinaEntity criar(DisciplinaEntity entity) {
-        if (!professorRepository.existsById(entity.getProfessor().getId())) {
-            throw new IllegalArgumentException("O id do professor não foi encontrado.");
+        Long professorId = entity.getProfessor().getId();
+
+        if (!professorRepository.existsById(professorId)) {
+            throw new ProfessorByIdNotFoundException(professorId);
         }
+
         return disciplinaRepository.save(entity);
     }
 
     @Override
     public DisciplinaEntity alterar(Long id, DisciplinaEntity entity) {
-        buscarPorId(id);
-        entity.setId(id);
-        return disciplinaRepository.save(entity);
+        DisciplinaEntity disciplina = disciplinaRepository.findById(id)
+                .orElseThrow(() -> new DisciplinaByIdNotFoundException(id));
+
+        Long professorId = entity.getProfessor().getId();
+        if (!professorRepository.existsById(professorId)) {
+            throw new ProfessorByIdNotFoundException(professorId);
+        }
+
+        disciplina.setNome(entity.getNome());
+        disciplina.setProfessor(entity.getProfessor());
+
+        return disciplinaRepository.save(disciplina);
     }
+
 
     @Override
     public void excluir(Long id) {

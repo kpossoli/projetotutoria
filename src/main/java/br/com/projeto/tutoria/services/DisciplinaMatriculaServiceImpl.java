@@ -3,7 +3,7 @@ package br.com.projeto.tutoria.services;
 import br.com.projeto.tutoria.entities.AlunoEntity;
 import br.com.projeto.tutoria.entities.DisciplinaEntity;
 import br.com.projeto.tutoria.entities.DisciplinaMatriculaEntity;
-import br.com.projeto.tutoria.exceptions.NotFoundException;
+import br.com.projeto.tutoria.exceptions.*;
 import br.com.projeto.tutoria.repositories.AlunoRepository;
 import br.com.projeto.tutoria.repositories.DisciplinaMatriculaRepository;
 import br.com.projeto.tutoria.repositories.DisciplinaRepository;
@@ -38,14 +38,15 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
     @Override
     public DisciplinaMatriculaEntity buscarPorId(Long id) {
         return disciplinaMatriculaRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("DisciplinaMatricula não encontrada com id: " + id));
+                .orElseThrow(() -> new DisciplinaMatriculaByIdNotFoundException(id));
     }
-
+    // Apagar, o POST é feito por matricularaluno
     @Override
     public DisciplinaMatriculaEntity criar(DisciplinaMatriculaEntity entity) {
         return disciplinaMatriculaRepository.save(entity);
     }
 
+    // Não foi solicitado. Mas pode ficar ¿?
     @Override
     public DisciplinaMatriculaEntity alterar(Long id, DisciplinaMatriculaEntity entity) {
         buscarPorId(id);
@@ -53,20 +54,17 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
         return disciplinaMatriculaRepository.save(entity);
     }
 
-    //O serviço usa os IDs para buscar as entidades Aluno e Disciplina correspondentes no banco de dados
-    //Se ambos forem encontrados, uma nova entidade DisciplinaMatriculaEntity é criada e configurada
-    //com as entidades AlunoEntity e DisciplinaEntity
+
     @Override
     public DisciplinaMatriculaEntity matricularAluno(Long alunoId, Long disciplinaId) {
         AlunoEntity aluno = alunoRepository.findById(alunoId)
-                .orElseThrow(() -> new NotFoundException("Aluno não encontrado com id: " + alunoId));
+                .orElseThrow(() -> new AlunoByIdNotFoundException(alunoId)); // refatorado
         DisciplinaEntity disciplina = disciplinaRepository.findById(disciplinaId)
-                .orElseThrow(() -> new NotFoundException("Disciplina não encontrada com id: " + disciplinaId));
+                .orElseThrow(() -> new DisciplinaByIdNotFoundException(disciplinaId)); // refatorado
 
         DisciplinaMatriculaEntity novaMatricula = new DisciplinaMatriculaEntity();
         novaMatricula.setAluno(aluno);
         novaMatricula.setDisciplina(disciplina);
-        // Defina valores padrão para outros campos aqui
 
         return disciplinaMatriculaRepository.save(novaMatricula);
     }
@@ -83,20 +81,14 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
         return disciplinaMatriculaRepository.findByDisciplinaId(disciplinaId);
     }
 
-//    @Override
-//    public void excluir(Long id) {
-//        DisciplinaMatriculaEntity entity = buscarPorId(id);
-//        repository.delete(entity);
-//    }
-
     @Override
-    public void excluir(Long id) throws Exception {
-        // Verifica se existem notas lançadas para a matrícula
+    public void excluir(Long id) {
+
         if (notaRepository.existsByDisciplinaMatriculaId(id)) {
-            throw new Exception("Existem notas lançadas para esta matrícula, não é possível excluir.");
+            throw new OperacaoNaoPermitidaException(id);
         } else {
             DisciplinaMatriculaEntity entity = disciplinaMatriculaRepository.findById(id)
-                    .orElseThrow(() -> new NotFoundException("Matrícula não encontrada com id: " + id));
+                    .orElseThrow(() -> new DisciplinaMatriculaByIdNotFoundException(id));
             disciplinaMatriculaRepository.delete(entity);
         }
     }
@@ -104,7 +96,7 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
     @Override
     public BigDecimal calcularMediaAluno(Long alunoId) {
         AlunoEntity aluno = alunoRepository.findById(alunoId)
-                .orElseThrow(() -> new NotFoundException("Aluno não encontrado com id: " + alunoId));
+                .orElseThrow(() -> new AlunoByIdNotFoundException(alunoId));
         List<DisciplinaMatriculaEntity> alunoMatriculas = disciplinaMatriculaRepository.findByAlunoId(alunoId);
 
         BigDecimal somaMediaDisciplinas = BigDecimal.ZERO;
@@ -116,7 +108,7 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
             contador = contador.add(BigDecimal.ONE);
         }
         if (contador.compareTo(BigDecimal.ZERO) == 0) {
-            return BigDecimal.ZERO;
+            return BigDecimal.ZERO.setScale(2);
         }
 
         return somaMediaDisciplinas.divide(contador, 2, RoundingMode.HALF_UP);

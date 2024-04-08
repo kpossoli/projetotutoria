@@ -1,7 +1,7 @@
 package br.com.projeto.tutoria.services;
 
 import br.com.projeto.tutoria.entities.AlunoEntity;
-import br.com.projeto.tutoria.exceptions.NotFoundException;
+import br.com.projeto.tutoria.exceptions.AlunoByIdNotFoundException;
 import br.com.projeto.tutoria.repositories.AlunoRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +24,7 @@ public class AlunoServiceImpl implements AlunoService {
     @Override
     public AlunoEntity buscarPorId(Long id) {
         return alunoRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(
-                        "Aluno não encontrado com id: " + id
-                ));
+                .orElseThrow(() -> new AlunoByIdNotFoundException(id));
     }
 
     @Override
