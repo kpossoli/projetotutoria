@@ -40,13 +40,7 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
         return disciplinaMatriculaRepository.findById(id)
                 .orElseThrow(() -> new DisciplinaMatriculaByIdNotFoundException(id));
     }
-    // Apagar, o POST é feito por matricularaluno
-    @Override
-    public DisciplinaMatriculaEntity criar(DisciplinaMatriculaEntity entity) {
-        return disciplinaMatriculaRepository.save(entity);
-    }
 
-    // Não foi solicitado. Mas pode ficar ¿?
     @Override
     public DisciplinaMatriculaEntity alterar(Long id, DisciplinaMatriculaEntity entity) {
         buscarPorId(id);
@@ -114,6 +108,5 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
         return somaMediaDisciplinas.divide(contador, 2, RoundingMode.HALF_UP);
 
     }
-
 
 }

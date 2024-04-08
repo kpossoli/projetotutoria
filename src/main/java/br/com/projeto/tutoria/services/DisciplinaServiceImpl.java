@@ -32,14 +32,6 @@ public class DisciplinaServiceImpl implements DisciplinaService {
                 .orElseThrow(() -> new DisciplinaByIdNotFoundException(id));
     }
 
-//    @Override
-//    public DisciplinaEntity criar(DisciplinaEntity entity) {
-//        if (!professorRepository.existsById(entity.getProfessor().getId())) {
-//            throw new IllegalArgumentException("O id do professor não foi encontrado.");
-//        }
-//        return disciplinaRepository.save(entity);
-//    }
-
     @Override
     public DisciplinaEntity criar(DisciplinaEntity entity) {
         Long professorId = entity.getProfessor().getId();

@@ -24,63 +24,53 @@ public class AlunoController {
     @GetMapping
     public ResponseEntity<List<AlunoEntity>> buscarTodos() {
         log.info("GET /alunos -> Início");
-
         List<AlunoEntity> alunos = service.buscarTodos();
         log.info("GET /alunos -> Encontrados {} registros", alunos.size());
-
         log.info("GET /alunos -> 200 OK");
         log.debug("GET /alunos -> Response Body:\n{}\n", JsonUtil.objetoParaJson(alunos));
         return ResponseEntity.status(HttpStatus.OK).body(alunos);
     }
 
-    
+    //TODO tratar o erro ao não colocar ID
     @GetMapping("{id}")
     public ResponseEntity<AlunoEntity> buscarPorId(@PathVariable Long id) {
-        log.info("GET /alunos -> Início" , id );
-
+        log.info("GET /alunos/{} -> Início" , id );
         AlunoEntity aluno = service.buscarPorId(id);
         log.info("GET /alunos/{} -> Encontrado", id);
-
         log.info("GET /alunos/{} -> 200 OK", id);
         log.debug("GET /alunos/{} -> Response Body:\n{}\n", id, JsonUtil.objetoParaJson(aluno));
-
         return ResponseEntity.status(HttpStatus.OK).body(aluno);
     }
 
     @PostMapping
     public ResponseEntity<AlunoEntity> criarAluno(@RequestBody AlunoEntity alunoRequisicao) {
         log.info("POST /alunos");
-
         AlunoEntity aluno = service.criar(alunoRequisicao);
         log.info("POST /alunos -> Cadastrado");
-
         log.info("POST /alunos -> 201 CREATED");
         log.debug("POST /alunos -> Response Body:\n{}\n", JsonUtil.objetoParaJson(alunoRequisicao));
         return ResponseEntity.status(HttpStatus.CREATED).body(aluno);
     }
 
+    //TODO tratar o erro ao não colocar ID
     @PutMapping("{id}")
     public ResponseEntity<AlunoEntity> alterarAluno(@PathVariable Long id, @RequestBody AlunoEntity alunoRequest) {
         log.info("PUT /alunos/{} -> Início", id);
-
         AlunoEntity aluno = service.alterar(id, alunoRequest);
-
         log.info("PUT /alunos/{} -> Atualizado com sucesso", id);
         log.info("PUT /alunos/{} -> 200 OK", id);
         log.debug("PUT /alunos/{} -> Response Body:\n{}\n", id, JsonUtil.objetoParaJson(alunoRequest));
         return ResponseEntity.status(HttpStatus.OK).body(service.alterar(id, aluno));
     }
 
+    //TODO tratar o erro ao não colocar ID
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deletarAluno(@PathVariable Long id) {
         log.info("DELETE /alunos/{}", id);
-
         service.excluir(id);
-
         log.info("DELETE /alunos/{} -> Excluído", id);
         log.info("DELETE /alunos/{} -> 204 NO CONTENT", id);
         return ResponseEntity.noContent().build();
     }
-
 
 }

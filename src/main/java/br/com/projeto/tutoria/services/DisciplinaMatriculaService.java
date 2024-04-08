@@ -11,8 +11,6 @@ public interface DisciplinaMatriculaService {
 
     DisciplinaMatriculaEntity buscarPorId(Long id);
 
-    DisciplinaMatriculaEntity criar(DisciplinaMatriculaEntity entity);
-
     DisciplinaMatriculaEntity alterar(Long id, DisciplinaMatriculaEntity entity);
 
     DisciplinaMatriculaEntity matricularAluno(Long alunoId, Long disciplinaId);
