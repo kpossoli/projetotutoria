@@ -2,6 +2,7 @@ package br.com.projeto.tutoria.exceptions;
 
 import br.com.projeto.tutoria.exceptions.dto.Erro;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,6 +35,65 @@ public class GlobalAdvice {
                 .mensagem(e.getMessage())
                 .build();
         return ResponseEntity.status(404).body(erro);
+    }
+
+    @ExceptionHandler(AlunoByIdNotFoundException.class)
+    public ResponseEntity<?> handler(AlunoByIdNotFoundException e) {
+        String mensagem = "Aluno não encontrado com id: " + e.getAlunoId();
+        Erro erro = Erro.builder()
+                .codigo("404")
+                .mensagem(mensagem)
+                .build();
+        return ResponseEntity.status(404).body(erro);
+    }
+
+    @ExceptionHandler(ProfessorByIdNotFoundException.class)
+    public ResponseEntity<?> handler(ProfessorByIdNotFoundException e) {
+        String mensagem = "Professor não encontrado com id: " + e.getProfessorId();
+        Erro erro = Erro.builder()
+                .codigo("404")
+                .mensagem(mensagem)
+                .build();
+        return ResponseEntity.status(404).body(erro);
+    }
+
+    @ExceptionHandler(DisciplinaByIdNotFoundException.class)
+    public ResponseEntity<?> handler(DisciplinaByIdNotFoundException e) {
+        String mensagem = "Disciplina não encontrada com id: " + e.getDisciplinaId();
+        Erro erro = Erro.builder()
+                .codigo("404")
+                .mensagem(mensagem)
+                .build();
+        return ResponseEntity.status(404).body(erro);
+    }
+
+    @ExceptionHandler(DisciplinaMatriculaByIdNotFoundException.class)
+    public ResponseEntity<?> handler(DisciplinaMatriculaByIdNotFoundException e) {
+        String mensagem = "Matrícula em disciplina não encontrada com id: " + e.getDisciplinaMatriculaId();
+        Erro erro = Erro.builder()
+                .codigo("404")
+                .mensagem(mensagem)
+                .build();
+        return ResponseEntity.status(404).body(erro);
+    }
+
+    @ExceptionHandler(OperacaoNaoPermitidaException.class)
+    public ResponseEntity<?> handleOperacaoNaoPermitida(OperacaoNaoPermitidaException e) {
+        String mensagem = "Existem notas lançadas para esta matrícula, não é possível excluir.";
+        Erro erro = Erro.builder()
+                .codigo("422") // Usando o código 422 Unprocessable Entity
+                .mensagem(mensagem)
+                .build();
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(erro);
+    }
+
+    @ExceptionHandler(MatriculaDuplicadaException.class)
+    public ResponseEntity<?> handleMatriculaDuplicada(MatriculaDuplicadaException e) {
+        Erro erro = Erro.builder()
+                .codigo("409") // HTTP 409 Conflict
+                .mensagem(e.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
     }
 
 }
