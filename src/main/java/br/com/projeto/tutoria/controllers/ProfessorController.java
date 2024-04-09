@@ -32,7 +32,7 @@ public class ProfessorController {
         return ResponseEntity.status(HttpStatus.OK).body(professores);
     }
 
-    //TODO tratar o erro ao não colocar ID
+
     @GetMapping("{id}")
     public ResponseEntity<ProfessorEntity> buscarPorId(@PathVariable Long id) {
         log.info("GET /professores/{} -> Início", id);
@@ -53,7 +53,7 @@ public class ProfessorController {
         return ResponseEntity.status(HttpStatus.CREATED).body(professor);
     }
 
-    //TODO tratar o erro ao não colocar ID
+
     @PutMapping("{id}")
     public ResponseEntity<ProfessorEntity> alterarProfessor(@PathVariable Long id, @RequestBody ProfessorEntity professorRequest) {
         log.info("PUT /professores/{} -> Início", id);
@@ -64,7 +64,7 @@ public class ProfessorController {
         return ResponseEntity.status(HttpStatus.OK).body(professor);
     }
 
-    //TODO tratar o erro ao não colocar ID
+
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deletarProfessor(@PathVariable Long id) {
         log.info("DELETE /professores/{}", id);

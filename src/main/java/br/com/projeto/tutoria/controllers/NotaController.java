@@ -34,10 +34,10 @@ public class NotaController {
     }
 
     //Método extra
-    //TODO quando é por id e não colocamos o id no postman, erro 500
+
     @GetMapping("{id}")
     public ResponseEntity<NotaEntity> buscarPorId(@PathVariable Long id) {
-        log.info("GET /notas -> Início" , id );
+        log.info("GET /notas -> Início", id);
         NotaEntity notas = service.buscarPorId(id);
         log.info("GET /notas/{} -> Encontrado", id);
         log.info("GET /notas/{} -> 200 OK", id);
@@ -55,7 +55,7 @@ public class NotaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(novaNota);
     }
 
-    //TODO tratar o erro ao não colocar ID
+
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deletarNota(@PathVariable Long id) {
         log.info("DELETE /notas/{}", id);
@@ -65,10 +65,10 @@ public class NotaController {
         return ResponseEntity.noContent().build();
     }
 
-    //TODO mudar o status ao colocar uma matricula que não existe, volta sem mensagem
+
     @GetMapping("/por-matricula/{matriculaId}")
     public ResponseEntity<List<NotaEntity>> buscarNotasPorMatriculaId(@PathVariable Long matriculaId) {
-        log.info("GET /notas/por-matricula/{} -> Início" , matriculaId );
+        log.info("GET /notas/por-matricula/{} -> Início", matriculaId);
         List<NotaEntity> notas = service.buscarNotasPorMatriculaId(matriculaId);
         log.info("GET /notas/por-matricula/{} -> Encontrados {} registros", notas.size());
         log.info("GET /notas/por-matricula/{} -> 200 OK");

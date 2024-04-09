@@ -30,10 +30,10 @@ public class DisciplinasController {
         return ResponseEntity.status(HttpStatus.OK).body(disciplinas);
     }
 
-    //TODO tratar o erro ao não colocar ID
+
     @GetMapping("{id}")
     public ResponseEntity<DisciplinaEntity> buscarPorId(@PathVariable Long id) {
-        log.info("GET /disciplinas/{} -> Início" , id );
+        log.info("GET /disciplinas/{} -> Início", id);
         DisciplinaEntity disciplina = service.buscarPorId(id);
         log.info("GET /disciplinas/{} -> Encontrado", id);
         log.info("GET /disciplinas/{} -> 200 OK", id);
@@ -51,7 +51,7 @@ public class DisciplinasController {
         return ResponseEntity.status(HttpStatus.CREATED).body(disciplina);
     }
 
-    //TODO tratar o erro ao não colocar ID
+
     @PutMapping("{id}")
     public ResponseEntity<DisciplinaEntity> alterarDisciplina(@PathVariable Long id, @RequestBody DisciplinaEntity disciplinaRequisicao) throws Exception {
         log.info("PUT /disciplinas/{}", id);
@@ -62,7 +62,7 @@ public class DisciplinasController {
         return ResponseEntity.status(HttpStatus.OK).body(disciplina); // Retorna 200
     }
 
-    //TODO tratar o erro ao não colocar ID
+
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws Exception {
         log.info("DELETE /disciplina/{}", id);

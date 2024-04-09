@@ -30,18 +30,18 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
         this.notaRepository = notaRepository;
     }
 
-    @Override // GET disciplina-matriculas OK
+    @Override
     public List<DisciplinaMatriculaEntity> buscarTodos() {
         return disciplinaMatriculaRepository.findAll();
     }
 
-    @Override // GET disciplina-matriculas/:id OK
+    @Override
     public DisciplinaMatriculaEntity buscarPorId(Long id) {
         return disciplinaMatriculaRepository.findById(id)
                 .orElseThrow(() -> new DisciplinaMatriculaByIdNotFoundException(id));
     }
 
-    @Override // PUT disciplina-matriculas/:id OK
+    @Override
     public DisciplinaMatriculaEntity alterar(Long id, DisciplinaMatriculaEntity entity) {
         buscarPorId(id);
         entity.setId(id);
@@ -67,7 +67,7 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
         return disciplinaMatriculaRepository.save(novaMatricula);
     }
 
-    @Override // GET disciplina-matriculas/por-aluno/:id OK
+    @Override
     public List<DisciplinaMatriculaEntity> buscarPorAlunoId(Long alunoId) {
         if (!alunoRepository.existsById(alunoId)) {
             throw new AlunoByIdNotFoundException(alunoId);
@@ -77,14 +77,14 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
     }
 
 
-    @Override // disciplina-matriculas/por-disciplina/:id OK // corregir id vazio
+    @Override
     public List<DisciplinaMatriculaEntity> buscarPorDisciplinaId(Long disciplinaId) {
         DisciplinaEntity disciplina = disciplinaRepository.findById(disciplinaId)
                 .orElseThrow(() -> new NotFoundException("Disciplina não encontrada com id: " + disciplinaId));
         return disciplinaMatriculaRepository.findByDisciplinaId(disciplinaId);
     }
 
-    @Override // disciplina-matriculas/:id OK // corregir id vazio
+    @Override
     public void excluir(Long id) {
 
         if (notaRepository.existsByDisciplinaMatriculaId(id)) {
@@ -95,7 +95,8 @@ public class DisciplinaMatriculaServiceImpl implements DisciplinaMatriculaServic
             disciplinaMatriculaRepository.delete(entity);
         }
     }
-    @Override // disciplina-matriculas/media-disciplinas/:id OK
+
+    @Override
     public BigDecimal calcularMediaAluno(Long alunoId) {
         List<DisciplinaMatriculaEntity> matriculas = disciplinaMatriculaRepository.findByAlunoId(alunoId);
         BigDecimal somaMediaDisciplinas = BigDecimal.ZERO;
